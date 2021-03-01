@@ -1,11 +1,17 @@
 const Jimp = require("jimp")
 
 //sine freq and amplitude and thickness
+//freq and amplitude of wave
 const bannerFreq = 60
 const bannerAmp = 600
+//line thickness
 const bannerThickness = 20;
+//overlayed text
 const bannerText = "Zachary Pike"
+//length x width of banner
 const bannerSize = [2560, 1440]
+//decrease opts
+const shouldDecrease = true, decreaseRate = 5;
 
 //icon stuff
 const iconFreq = 20;
@@ -22,10 +28,13 @@ const outFolder = "out"
 
 console.log("Started");
 
+//starttime for the timer
 var then;
 
 (async () => {
+    //store the starttime
     then = Date.now()
+
     //load font
     var font = await Jimp.loadFont(Jimp.FONT_SANS_128_WHITE);
 
@@ -38,8 +47,10 @@ var then;
         
         for (let x=0; x < image.bitmap.width; x++) {
 
-            if (x % 5 == 0) {
-                _amp--;
+            if (shouldDecrease == true) {
+                if (x % decreaseRate == 0) {
+                    _amp--;
+                }
             }
 
             for (let y=0; y < image.bitmap.height; y++) {
